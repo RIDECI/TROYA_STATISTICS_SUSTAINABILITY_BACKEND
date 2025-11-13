@@ -1,4 +1,4 @@
-package edu.dosw.rideci.TROYA_STATISTICS_SUSTAINABILITY_BACKEND;
+package edu.dosw.rideci;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
