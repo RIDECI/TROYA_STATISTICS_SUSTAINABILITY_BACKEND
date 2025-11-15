@@ -1,121 +1,244 @@
+
 # TROYA_STATISTICS_SUSTAINABILITY_BACKEND
 
-Microservicio de Estadisticas y Sostenibilidad
+## Desarrolladores
 
-## 👥 Integrantes del equipo
-- Julian Camilo Lopez Barrero
-- Julian David Castiblanco Real
-- Valeria Bermudez Aguilar
-- Sebastian Enrique Barros Barros
-- Santiago Suarez Puchigay
-
-
---- 
-
-## Descripción
-
-Modulo del proyecto RIDECI que permite medir el impacto ambiental y social del uso de RidECI, generando indicadores sobre ahorro de CO₂, número de viajes compartidos y nivel de participación.
-
----
-
-## Estrategia de versionamiento y ramas
-
-- main: Versión estable para PREPROD
-- develop: Rama principal de desarrollo
-- bugfix/*: Manejo de errores
-- release/*: Manejo de versiones.
-
-**Template commits** : ``feature: Tarea - Acción Realizada``
-
---- 
-
-## Tecnologías usadas
-
-| Tipo                   | Tecnología                         | Versión | Descripción                                                            |
-|------------------------|------------------------------------|---------|------------------------------------------------------------------------|
-| Lenguaje               | **Java**                           | 17      | Lenguaje principal del proyecto, orientado a objetos y multiplataforma |
-| Framework              | **Spring Boot**                    | 3.5.7   | Framework para desarrollo de microservicios y APIs REST                |
-| Gestor de Dependencias | **Maven**                          | 3.9.x   | Herramienta de compilación y gestión de dependencias                   |
-| Cobertura de Código    | **JaCoCo**                         | 0.8.11  | Generación de reportes de cobertura de pruebas unitarias               |
-| Análisis de Calidad    | **SonarQube**                      | 10.x    | Análisis estático del código para asegurar calidad y mantenibilidad    |
-| Documentación de API   | **Swagger UI (Springdoc OpenAPI)** | 2.6.0   | Interfaz interactiva para probar y documentar endpoints REST           |
-| Contenedores           | **Docker**                         | 27.x    | Creación y ejecución de contenedores para despliegues portables        |
-| CI/CD                  | **GitHub Actions**                 | -       | Automatización del ciclo de integración y despliegue continuo          |
-| Pruebas de API         | **Postman**                        | 11.x    | Plataforma para diseño, ejecución y validación de pruebas de endpoints |
-| Seguridad              | **JWT (Java JSON Web Tokens)**     | 0.11.5  | Mecanismo de autenticación y autorización basada en tokens             |
-
----
-
-## Arquitectura y Funcionamiento
-
-El microservicio está desarrollado bajo el patrón de **Arquitectura Hexagonal**,
-cuyo objetivo principal es aislar la lógica de negocio del resto de los componentes del sistema.  
-Esto permite que el núcleo de la aplicación sea completamente independiente de los detalles de infraestructura.
-
-
-# Estructura
-
-    src/
-    ├── main/
-    │   ├── java/edu/dosw/rideci/
-    │   │   ├── domain/         
-    │   │   ├── application/    
-    │   │   └── infrastructure/ 
-    │   └── resources/
-    └── test/
-
-<h3>Domain </h3>
-Contiene las entidades y las reglas de negocio puras.
-
-
-
-
-<h3>Application </h3>
-
-- Casos de uso: Responsables de gestionar la lógica del dominio.
-- DTos: Objetos de transferencia de datos usados entre las capas.
-- Mappers: Convertidores entre entidades y DTOs.
-- Exceptions: Excepciones personalizadas que representan errores del negocio o de la aplicación.
-
-
-<h3>Infrastructure </h3>
-
-- API / Controllers: Endpoints REST que reciben las solicitudes del usuario, llaman los casos de uso y devuelven las respuestas.
-
-- Database: Configuración de la base de datos y sus modelos concretos.
-
-- Config: Clases de configuración general del sistema.
-
----
-
-## Interacción con otros módulos
-
-
+* Julian Camilo Lopez Barrero
+* Julian David Castiblanco Real
+* Valeria Bermudez Aguilar
+* Sebastian Enrique Barros Barros
+* Santiago Suarez Puchigay
 
 
 ---
 
-## Despliegue CI/CD
+## Tabla de Contenidos
 
-- Pipeline de desarrollo;
-- Pipeline de producción:
-- Swagger Expuesto:
+* [ Estrategia de Versionamiento y Branching](#-estrategia-de-versionamiento-y-branching)
+
+    * [ Estrategia de Ramas (Git Flow)](#-estrategia-de-ramas-git-flow)
+    * [ Convenciones de Nomenclatura](#-convenciones-de-nomenclatura)
+    * [ Convenciones de Commits](#-convenciones-de-commits)
+* [ Arquitectura del Proyecto](#-arquitectura-del-proyecto)
+
+    * [ Estructura de Capas](#️-estructura-de-capas)
+* [ Tecnologías Utilizadas](#️-tecnologías-utilizadas)
+* [ Arquitectura Limpia - Organización de Capas](#️-arquitectura-limpia---organización-de-capas)
+* [Diagramas del Módulo](#diagramas-del-módulo)
+
 
 ---
 
-## Diagramas
+##  Estrategia de Versionamiento y Branching
+
+Se implementa una estrategia de versionamiento basada en **GitFlow**, garantizando un flujo de desarrollo **colaborativo, trazable y controlado**.
+
+###  Beneficios:
+
+- Permite trabajo paralelo sin conflictos
+- Mantiene versiones estables y controladas
+- Facilita correcciones urgentes (*hotfixes*)
+- Proporciona un historial limpio y entendible
+
+---
+
+##  Estrategia de Ramas (Git Flow)
+
+| **Rama**                | **Propósito**                            | **Recibe de**           | **Envía a**        | **Notas**                      |
+| ----------------------- | ---------------------------------------- | ----------------------- | ------------------ | ------------------------------ |
+| `main`                  | Código estable para PREPROD o Producción | `release/*`, `hotfix/*` | Despliegue         | Protegida con PR y CI exitoso  |
+| `develop`               | Rama principal de desarrollo             | `feature/*`             | `release/*`        | Base para integración continua |
+| `feature/*`             | Nuevas funcionalidades o refactors       | `develop`               | `develop`          | Se eliminan tras el merge      |
+| `release/*`             | Preparación de versiones estables        | `develop`               | `main` y `develop` | Incluye pruebas finales        |
+| `bugfix/*` o `hotfix/*` | Corrección de errores críticos           | `main`                  | `main` y `develop` | Parches urgentes               |
+
+---
+
+##  Convenciones de Nomenclatura
+
+### Feature Branches
+
+```
+feature/[nombre-funcionalidad]-Troya_[codigo-jira]
+```
+
+**Ejemplos:**
+
+```
+- feature/statitics-module-troya_23
+- feature/userProfile-service-troya_41
+```
+
+**Reglas:**
+
+*  Formato: *kebab-case*
+*  Incluir código Jira
+*  Descripción breve y clara
+*  Longitud máxima: 50 caracteres
+
+---
+
+### Release Branches
+
+```
+release/[version]
+```
+
+**Ejemplos:**
+
+```
+- release/1.0.0
+- release/1.1.0-beta
+```
+
+---
+
+### Hotfix Branches
+
+```
+hotfix/[descripcion-breve-del-fix]
+```
+
+**Ejemplos:**
+
+```
+- hotfix/fix-token-expiration
+- hotfix/security-patch
+```
+
+---
+
+## Convenciones de Commits
+
+### Formato Estándar
+
+```
+[codigo-jira] [tipo]: [descripción breve de la acción]
+```
+
+**Ejemplos:**
+
+```
+45-feat: agregar grafico de sostenibilidad
+46-fix: corregir error en estadistica por consumo Co2
+```
+
+---
+
+### Tipos de Commit
+
+| **Tipo**   | **Descripción**                      | **Ejemplo**                                     |
+| ----------- | ------------------------------------ | ----------------------------------------------- |
+| `feat`      | Nueva funcionalidad                  | `22-feat: implementar autenticación con JWT`    |
+| `fix`       | Corrección de errores                | `24-fix: solucionar error en endpoint de estadisticas` |
+| `docs`      | Cambios en documentación             | `25-docs: actualizar README con nuevas rutas`   |
+| `refactor`  | Refactorización sin cambio funcional | `27-refactor: optimizar servicio de sosteniblidad`  |
+| `test`      | Pruebas unitarias o de integración   | `29-test: agregar tests para statistics service`       |
+| `chore`     | Mantenimiento o configuración        | `30-chore: actualizar dependencias de Maven`    |
+
+
+**Reglas:**
+
+* Un commit = una acción completa
+* Máximo **72 caracteres** por línea
+* Usar modo imperativo (“agregar”, “corregir”, etc.)
+* Descripción clara de qué y dónde
+* Commits pequeños y frecuentes
+
+---
+
+## Arquitectura del Proyecto
+
+El backend de **TROYA_STATISTICS_SUSTAINABILITY** sigue una **arquitectura limpia y desacoplada**, priorizando:
+
+* Separación de responsabilidades
+* Mantenibilidad
+* Escalabilidad
+* Facilidad de pruebas
+
+---
+
+## Estructura de Capas
+
+```
+📂 troya_backend
+ ┣ 📂 domain/
+ ┃ ┣ 📄 Entities/
+ ┃ ┣ 📄 ValueObjects/
+ ┃ ┣ 📄 Enums/
+ ┃ ┣ 📄 Services/
+ ┃ ┗ 📄 Events/
+ ┣ 📂 application/
+ ┃ ┣ 📄 UseCases/
+ ┃ ┣ 📄 DTOs/
+ ┃ ┣ 📄 Mappers/
+ ┃ ┗ 📄 Exceptions/
+ ┣ 📂 infrastructure/
+ ┃ ┣ 📄 Controllers/
+ ┃ ┣ 📄 Database/
+ ┃ ┣ 📄 Repositories/
+ ┃ ┣ 📄 Config/
+ ┃ ┗ 📄 Security/
+ ┗ 📄 pom.xml
+```
+
+---
+
+## Tecnologías Utilizadas
+
+| **Categoría**              | **Tecnologías**                           |
+| -------------------------- | ----------------------------------------- |
+| **Backend**                | Java 17, Spring Boot, Maven               |
+| **Infraestructura**        | Docker, Kubernetes (K8s), Railway, Vercel |
+| **Seguridad**              | JWT, Spring Security                      |
+| **Integración Continua**   | GitHub Actions, Jacoco, SonarQube         |
+| **Documentación y Diseño** | Swagger UI, Figma                         |
+| **Comunicación y Gestión** | Slack, Jira                               |
+| **Testing**                | Postman                                   |
+
+---
+
+## Arquitectura Limpia - Organización de Capas
+
+### DOMAIN (Dominio)
+
+Representa el **núcleo del negocio**, define **qué hace el sistema, no cómo lo hace**.
+Incluye entidades, objetos de valor, enumeraciones, interfaces de repositorio y servicios de negocio.
+
+### APPLICATION (Aplicación)
+
+Orquesta la lógica del negocio a través de **casos de uso**, **DTOs**, **mappers** y **excepciones personalizadas**.
+
+### INFRASTRUCTURE (Infraestructura)
+
+Implementa los **detalles técnicos**: controladores REST, persistencia, configuración, seguridad y conexión con servicios externos.
+
+---
+
+## Diagramas del Módulo
+
+### Diagrama de Componentes Específico
+
+![Diagrama de componentes](docs/img/diagramaComponentesEspecifico.png)
 
 
 ---
 
-## Funcionalidades
+### Diagrama de Clases
 
+![Diagrama de clases](docs/img/digramaClases.png)
 
 ---
-## Pruebas
 
-**Evidencia de Pruebas**
+### Diagrama de Bases de Datos
 
-**Cómo Ejecutar las Pruebas**
+![Diagrama de datos](docs/img/diagramaBaseDatos.png)
 
-``mvn clean test``
+---
+
+### Diagrama de Despliegue Específico del Módulo
+
+![Diagrama de despliegue](docs/img/diagramaDespliegue.png)
+
+---
+
