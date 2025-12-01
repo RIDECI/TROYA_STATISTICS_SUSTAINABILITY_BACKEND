@@ -10,6 +10,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommunityStats {
+    private String id;
     private double totalCo2Saved;
     private int totalSharedTrips;
     private Map<UserType, Integer> totalActiveUsers;

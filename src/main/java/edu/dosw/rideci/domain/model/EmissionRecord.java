@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmissionRecord {
+    private Long eId;
     private Long userId;
     private LocalDate date;
     private double distance;
