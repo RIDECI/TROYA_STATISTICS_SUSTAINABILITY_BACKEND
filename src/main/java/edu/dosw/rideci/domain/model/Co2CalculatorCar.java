@@ -4,9 +4,9 @@ import lombok.*;
 
 @Getter
 @Setter
-@Builder
+//@Builder
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 public class Co2CalculatorCar implements Co2Calculator {
     @Override
     public double calculateCO2(double distance) {

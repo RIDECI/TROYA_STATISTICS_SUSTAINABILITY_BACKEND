@@ -3,10 +3,10 @@ package edu.dosw.rideci.infraestructure.persistence.entity;
 
 
 import jakarta.persistence.Id;
+import lombok.Builder;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
