@@ -1,15 +1,19 @@
+# 🐴 TROYA_STATISTICS_SUSTAINABILITY_BACKEND
+The service's main objective is to measure and analyze the environmental and social impact of using RIDECI, providing key indicators that reflect CO₂ emission savings, the number of shared rides, and the level of community participation.
 
-# TROYA_STATISTICS_SUSTAINABILITY_BACKEND
+The system will automatically calculate the estimated emission reduction per user and present comparative graphs showing the collective savings achieved over different time periods. It will also allow the generation of detailed reports by week, month, or semester, with the option to apply filters based on user type or most frequent destination.
 
-## Desarrolladores
+The results can be exported in PDF and Excel formats, facilitating analysis and institutional dissemination.
 
-* Julian Camilo Lopez Barrero
-* Julian David Castiblanco Real
-* Valeria Bermudez Aguilar
-* Sebastian Enrique Barros Barros
-* Santiago Suarez Puchigay
+The module will also include a public dashboard highlighting the most relevant sustainability metrics, promoting transparency and the institution's environmental commitment to the community.
 
+## 👥 Developers
 
+- Julian Camilo Lopez Barrero
+- Julian David Castiblanco Real
+- Valeria Bermudez Aguilar
+- Sebastian Enrique Barros Barros
+- Santiago Suarez Puchigay
 ---
 
 ## Tabla de Contenidos
@@ -29,190 +33,121 @@
 
 ---
 
-##  Estrategia de Versionamiento y Branching
+# 🏷️ Naming Conventions
 
-Se implementa una estrategia de versionamiento basada en **GitFlow**, garantizando un flujo de desarrollo **colaborativo, trazable y controlado**.
+# 🌿 Branches Strategy & Structure
 
-###  Beneficios:
+This module follows a strict branching strategy based on Gitflow to ensure the ordered versioning,code quality and continous integration.
 
-- Permite trabajo paralelo sin conflictos
-- Mantiene versiones estables y controladas
-- Facilita correcciones urgentes (*hotfixes*)
-- Proporciona un historial limpio y entendible
 
----
 
-##  Estrategia de Ramas (Git Flow)
-
-| **Rama**                | **Propósito**                            | **Recibe de**           | **Envía a**        | **Notas**                      |
+| **Branch**                | **Purpose**                            | **Receive of**           | **Sent to**        | **Notes**                      |
 | ----------------------- | ---------------------------------------- | ----------------------- | ------------------ | ------------------------------ |
-| `main`                  | Código estable para PREPROD o Producción | `release/*`, `hotfix/*` | Despliegue         | Protegida con PR y CI exitoso  |
-| `develop`               | Rama principal de desarrollo             | `feature/*`             | `release/*`        | Base para integración continua |
-| `feature/*`             | Nuevas funcionalidades o refactors       | `develop`               | `develop`          | Se eliminan tras el merge      |
-| `release/*`             | Preparación de versiones estables        | `develop`               | `main` y `develop` | Incluye pruebas finales        |
-| `bugfix/*` o `hotfix/*` | Corrección de errores críticos           | `main`                  | `main` y `develop` | Parches urgentes               |
+| `main`                  | 🏁 Stable code for preproduction or Production | `release/*`, `hotfix/*` | 🚀 Production      | 🔐 Protected with PR y successful CI   |
+| `develop`               | 🧪 Main developing branch             | `feature/*`             | `release/*`        | 🔄 Base to continous deployment |
+| `feature/*`             | ✨ New functions or refactors  to be implemented       | `develop`               | `develop`          | 🧹 Are deleted after merge to develop      |
+| `release/*`             | 📦 Release preparation & final polish.      | `develop`               | `main` y `develop` | 🧪  Includes final QA. No new features added here.     |
+| `bugfix/*` o `hotfix/*` | 🛠️ Critical fixes for production         | `main`                  | `main` y `develop` | ⚡ Urgent patches. Highest priority             |
 
----
 
-##  Convenciones de Nomenclatura
+## 📝 Commit Message Guidelines
 
-### Feature Branches
+We follow the **[Conventional Commits](https://www.conventionalcommits.org/)** specification.
 
-```
-feature/[nombre-funcionalidad]-Troya_[codigo-jira]
-```
+### 🧱 Standard Format
 
-**Ejemplos:**
-
-```
-- feature/statitics-module-troya_23
-- feature/userProfile-service-troya_41
+```text
+<type>(<scope>): <short description>
 ```
 
-**Reglas:**
+## 🏛️ Project Architecture
 
-*  Formato: *kebab-case*
-*  Incluir código Jira
-*  Descripción breve y clara
-*  Longitud máxima: 50 caracteres
+The Troya Reputation & Profiles have a unacoplated hexagonal - clean architecture where looks for isolate the business logic with the other part of the app dividing it in multiple components:
 
----
+* **🧠 Domain (Core)**: Contains the business logic and principal rules.
 
-### Release Branches
+* **🎯 Ports (Interfaces)**: Are interfaces that define the actions that the domain can do.
 
-```
-release/[version]
-```
+* **🔌 Adapters (Infrastructure)**: Are the implementations of the ports that connect the domain with the specific technologies. 
 
-**Ejemplos:**
+The use of this architecture has the following benefits:
 
-```
-- release/1.0.0
-- release/1.1.0-beta
-```
-
----
-
-### Hotfix Branches
-
-```
-hotfix/[descripcion-breve-del-fix]
-```
-
-**Ejemplos:**
-
-```
-- hotfix/fix-token-expiration
-- hotfix/security-patch
-```
-
----
-
-## Convenciones de Commits
-
-### Formato Estándar
-
-```
-[codigo-jira] [tipo]: [descripción breve de la acción]
-```
-
-**Ejemplos:**
-
-```
-45-feat: agregar grafico de sostenibilidad
-46-fix: corregir error en estadistica por consumo Co2
-```
-
----
-
-### Tipos de Commit
-
-| **Tipo**   | **Descripción**                      | **Ejemplo**                                     |
-| ----------- | ------------------------------------ | ----------------------------------------------- |
-| `feat`      | Nueva funcionalidad                  | `22-feat: implementar autenticación con JWT`    |
-| `fix`       | Corrección de errores                | `24-fix: solucionar error en endpoint de estadisticas` |
-| `docs`      | Cambios en documentación             | `25-docs: actualizar README con nuevas rutas`   |
-| `refactor`  | Refactorización sin cambio funcional | `27-refactor: optimizar servicio de sosteniblidad`  |
-| `test`      | Pruebas unitarias o de integración   | `29-test: agregar tests para statistics service`       |
-| `chore`     | Mantenimiento o configuración        | `30-chore: actualizar dependencias de Maven`    |
-
-
-**Reglas:**
-
-* Un commit = una acción completa
-* Máximo **72 caracteres** por línea
-* Usar modo imperativo (“agregar”, “corregir”, etc.)
-* Descripción clara de qué y dónde
-* Commits pequeños y frecuentes
-
----
-
-## Arquitectura del Proyecto
-
-El backend de **TROYA_STATISTICS_SUSTAINABILITY** sigue una **arquitectura limpia y desacoplada**, priorizando:
-
-* Separación de responsabilidades
-* Mantenibilidad
-* Escalabilidad
-* Facilidad de pruebas
-
----
+* ✅ **Separation of Concerns:** Distinct boundaries between logic and infrastructure.
+* ✅ **Maintainability:** Easier to update or replace specific components.
+* ✅ **Scalability:** Components can evolve independently.
+* ✅ **Testability:** The domain can be tested in isolation without a database or server.
 
 ## Estructura de Capas
 
-```
-📂 troya_backend
- ┣ 📂 domain/
- ┃ ┣ 📄 Entities/
- ┃ ┣ 📄 ValueObjects/
- ┃ ┣ 📄 Enums/
- ┃ ┣ 📄 Services/
- ┃ ┗ 📄 Events/
- ┣ 📂 application/
- ┃ ┣ 📄 UseCases/
- ┃ ┣ 📄 DTOs/
- ┃ ┣ 📄 Mappers/
- ┃ ┗ 📄 Exceptions/
- ┣ 📂 infrastructure/
- ┃ ┣ 📄 Controllers/
- ┃ ┣ 📄 Database/
- ┃ ┣ 📄 Repositories/
- ┃ ┣ 📄 Config/
- ┃ ┗ 📄 Security/
- ┗ 📄 pom.xml
-```
+📂 TROYA_STADISTICS_SUSTAINABILITY_BACKEND
+ ┣ 📂 src/
+ ┃ ┣ 📂 main/
+ ┃ ┃ ┣ 📂 java/
+ ┃ ┃ ┃ ┗ 📂 edu/dosw/rideci/
+ ┃ ┃ ┃   ┣ 📄 TroyaStadisticsSustainabilityBackendApplication.java
+ ┃ ┃ ┃   ┣ 📂 domain/
+ ┃ ┃ ┃   ┃ ┗ 📂 model/            # 🧠 Domain models
+ ┃ ┃ ┃   ┣ 📂 application/
+ ┃ ┃ ┃   ┃ ┣ 📂 ports/
+ ┃ ┃ ┃   ┃ ┃ ┣ 📂 input/          # 🎯 Input ports (Exposed use cases)
+ ┃ ┃ ┃   ┃ ┃ ┗ 📂 output/         # 🔌 Output ports (external gateways)
+ ┃ ┃ ┃   ┃ ┗ 📂 usecases/         # ⚙️ Use case implementations
+ ┃ ┃ ┃   ┣ 📂 infrastructure/
+ ┃ ┃ ┃   ┃ ┗ 📂 adapters/
+ ┃ ┃ ┃   ┃   ┣ 📂 input/
+ ┃ ┃ ┃   ┃   ┃ ┗ 📂 controller/   # 🌐 Input adapters (REST controllers)
+ ┃ ┃ ┃   ┃   ┗ 📂 output/
+ ┃ ┃ ┃   ┃     ┗ 📂 persistence/  # 🗄️ Output adapters (persistance)
+ ┃ ┃ ┗ 📂 resources/
+ ┃ ┃   ┗ 📄 application.properties
+ ┣ 📂 test/
+ ┃ ┣ 📂 java/
+ ┃ ┃ ┗ 📂 edu/dosw/rideci/
+ ┃ ┃   ┗ 📂 tests/
+ ┣ 📂 docs/
+    ┣ 📂 img/
+      ┣ diagramaClases.jpg
+      ┣ diagramaDatos.jpg
+      ┃ diagramaDespliegue.png
+ ┣ 📄 pom.xml
+ ┣ 📄 mvnw / mvnw.cmd
+ ┗ 📄 README.md
 
 ---
 
-## Tecnologías Utilizadas
+# Technologies
 
-| **Categoría**              | **Tecnologías**                           |
-| -------------------------- | ----------------------------------------- |
-| **Backend**                | Java 17, Spring Boot, Maven               |
-| **Infraestructura**        | Docker, Kubernetes (K8s), Railway, Vercel |
-| **Seguridad**              | JWT, Spring Security                      |
-| **Integración Continua**   | GitHub Actions, Jacoco, SonarQube         |
-| **Documentación y Diseño** | Swagger UI, Figma                         |
-| **Comunicación y Gestión** | Slack, Jira                               |
-| **Testing**                | Postman                                   |
+The following technologies were used to build and deploy this module:
 
----
+### Backend & Core
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white)
 
-## Arquitectura Limpia - Organización de Capas
+### Database
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 
-### DOMAIN (Dominio)
+### DevOps & Infrastructure
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white)
+![Railway](https://img.shields.io/badge/Railway-131415?style=for-the-badge&logo=railway&logoColor=white)
+![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
-Representa el **núcleo del negocio**, define **qué hace el sistema, no cómo lo hace**.
-Incluye entidades, objetos de valor, enumeraciones, interfaces de repositorio y servicios de negocio.
+### CI/CD & Quality Assurance
+![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
+![SonarQube](https://img.shields.io/badge/SonarQube-4E9BCD?style=for-the-badge&logo=sonarqube&logoColor=white)
+![JaCoCo](https://img.shields.io/badge/JaCoCo-Coverage-green?style=for-the-badge)
 
-### APPLICATION (Aplicación)
+### Documentation & Testing
+![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
+![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
-Orquesta la lógica del negocio a través de **casos de uso**, **DTOs**, **mappers** y **excepciones personalizadas**.
+### Design 
+![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 
-### INFRASTRUCTURE (Infraestructura)
-
-Implementa los **detalles técnicos**: controladores REST, persistencia, configuración, seguridad y conexión con servicios externos.
-
+### Comunication & Project Management
+![Jira](https://img.shields.io/badge/jira-%230A0FFF.svg?style=for-the-badge&logo=jira&logoColor=white)
+![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)
 ---
 
 ## Diagramas del Módulo
@@ -241,4 +176,47 @@ Implementa los **detalles técnicos**: controladores REST, persistencia, configu
 ![Diagrama de despliegue](docs/img/diagramaDespliegue.png)
 
 ---
+
+# 🚀 Getting Started
+
+This section guides you through setting ip the project locally. This project requires **Java 17**. If you have a different version, you can change it or we recommend using **Docker** to ensure compatibility before compile.
+
+### Clone & open repository
+
+``` bash
+git clone https://github.com/RIDECI/TROYA_REPUTATION_BACKEND.git
+```
+
+``` bash
+cd TROYA_REPUTATION_BACKEND
+```
+
+You can open it on your favorite IDE
+
+### Dockerize the project
+
+Dockerize before compile the project avoid configuration issues and ensure environment consistency.
+
+``` bash
+docker compose up -d
+```
+
+### Install dependencies & compile project
+
+Download dependencies and compile the source code.
+
+``` bash
+mvn clean install
+```
+
+``` bash
+mvn clean compile
+```
+
+### To run the project
+Start the Spring Boot server
+
+``` bash
+mvn spring-boot:run
+```
 
