@@ -16,20 +16,19 @@ The module will also include a public dashboard highlighting the most relevant s
 - Santiago Suarez Puchigay
 ---
 
-## Tabla de Contenidos
+## 📑 Content Table
 
-* [ Estrategia de Versionamiento y Branching](#-estrategia-de-versionamiento-y-branching)
-
-    * [ Estrategia de Ramas (Git Flow)](#-estrategia-de-ramas-git-flow)
-    * [ Convenciones de Nomenclatura](#-convenciones-de-nomenclatura)
-    * [ Convenciones de Commits](#-convenciones-de-commits)
-* [ Arquitectura del Proyecto](#-arquitectura-del-proyecto)
-
-    * [ Estructura de Capas](#️-estructura-de-capas)
-* [ Tecnologías Utilizadas](#️-tecnologías-utilizadas)
-* [ Arquitectura Limpia - Organización de Capas](#️-arquitectura-limpia---organización-de-capas)
-* [Diagramas del Módulo](#diagramas-del-módulo)
-
+1. [Project Architecture](#-project-architecture)
+    - [Hexagonal Structure](#-clean---hexagonal-structure)
+2. [API Documentation](#-api-endpoints)
+    - [Endpoints](#-api-endpoints)
+3. [Input & Output Data](#input-and-output-data)
+4. [Microservices Integration](#-connections-with-other-microservices)
+5. [Technologies](#technologies)
+6. [Branch Strategy](#-branches-strategy--structure)
+7. [System Architecture & Design](#-system-architecture--design) 
+8. [Getting Started](#-getting-started) 
+9. [Testing](#-testing)
 
 ---
 
@@ -76,15 +75,16 @@ The use of this architecture has the following benefits:
 * ✅ **Maintainability:** Easier to update or replace specific components.
 * ✅ **Scalability:** Components can evolve independently.
 * ✅ **Testability:** The domain can be tested in isolation without a database or server.
+* 
+## 📂 Clean - Hexagonal Structure
 
-## Estructura de Capas
-
-📂 TROYA_STADISTICS_SUSTAINABILITY_BACKEND
+```
+📂 TROYA_STADISTICS_BACKEND
  ┣ 📂 src/
  ┃ ┣ 📂 main/
  ┃ ┃ ┣ 📂 java/
  ┃ ┃ ┃ ┗ 📂 edu/dosw/rideci/
- ┃ ┃ ┃   ┣ 📄 TroyaStadisticsSustainabilityBackendApplication.java
+ ┃ ┃ ┃   ┣ 📄 TroyaStadisticsBackendApplication.java
  ┃ ┃ ┃   ┣ 📂 domain/
  ┃ ┃ ┃   ┃ ┗ 📂 model/            # 🧠 Domain models
  ┃ ┃ ┃   ┣ 📂 application/
@@ -112,8 +112,8 @@ The use of this architecture has the following benefits:
  ┣ 📄 pom.xml
  ┣ 📄 mvnw / mvnw.cmd
  ┗ 📄 README.md
+```
 
----
 
 # Technologies
 
