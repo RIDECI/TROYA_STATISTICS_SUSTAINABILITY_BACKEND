@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReportCriteriaResponseDTO {
+public class ReportCriteriaRequestDTO {
     private Long userId;
     private LocalDate startDate;
     private LocalDate endDate;
