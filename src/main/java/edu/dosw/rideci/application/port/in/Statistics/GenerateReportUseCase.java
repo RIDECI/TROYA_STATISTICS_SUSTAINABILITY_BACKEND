@@ -1,4 +1,4 @@
-package edu.dosw.rideci.application.port.in;
+package edu.dosw.rideci.application.port.in.Statistics;
 
 import edu.dosw.rideci.domain.model.ReportCriteria;
 
