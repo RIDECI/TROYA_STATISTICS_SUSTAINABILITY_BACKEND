@@ -1,4 +1,4 @@
-package edu.dosw.rideci.infraestructure.persistence.repository.CommunityStats;
+package edu.dosw.rideci.infraestructure.persistence.repository.Stats.CommunityStats;
 
 import edu.dosw.rideci.infraestructure.persistence.entity.CommunityStatsDocument;
 import org.springframework.data.mongodb.repository.MongoRepository;

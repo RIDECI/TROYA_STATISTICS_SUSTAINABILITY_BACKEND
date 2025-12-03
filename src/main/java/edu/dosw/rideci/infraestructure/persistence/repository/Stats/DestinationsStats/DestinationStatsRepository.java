@@ -1,4 +1,4 @@
-package edu.dosw.rideci.infraestructure.persistence.repository.DestinationsStats;
+package edu.dosw.rideci.infraestructure.persistence.repository.Stats.DestinationsStats;
 
 import edu.dosw.rideci.infraestructure.persistence.entity.DestinationsStatsDocument;
 import org.springframework.data.mongodb.repository.MongoRepository;

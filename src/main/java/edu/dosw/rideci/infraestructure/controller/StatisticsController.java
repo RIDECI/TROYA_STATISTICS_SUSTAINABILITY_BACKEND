@@ -3,14 +3,15 @@ package edu.dosw.rideci.infraestructure.controller;
 
 import edu.dosw.rideci.application.mapper.InitialCommunityStatsMapper;
 import edu.dosw.rideci.application.mapper.InitialReportMapper;
+import edu.dosw.rideci.application.mapper.InitialUserStatsMapper;
 import edu.dosw.rideci.application.port.in.Statistics.*;
+import edu.dosw.rideci.application.port.in.Sustainability.GetCommunitySustainabilityUseCase;
+import edu.dosw.rideci.application.port.in.Sustainability.GetUserSustainabilityUseCase;
 import edu.dosw.rideci.domain.model.ReportCriteria;
 import edu.dosw.rideci.domain.model.enums.ReportFormat;
 import edu.dosw.rideci.domain.model.enums.UserStatField;
 import edu.dosw.rideci.infraestructure.controller.dto.request.ReportCriteriaRequestDTO;
-import edu.dosw.rideci.infraestructure.controller.dto.response.CommunityStatsResponseDTO;
-import edu.dosw.rideci.infraestructure.controller.dto.response.PublicPanelResponseDTO;
-import edu.dosw.rideci.infraestructure.controller.dto.response.UserStatsResponseDTO;
+import edu.dosw.rideci.infraestructure.controller.dto.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -35,9 +36,17 @@ public class StatisticsController {
 
     private final GetUserPanelUseCase getUserPanelUseCase;
 
+    private final GetCommunitySustainabilityUseCase getCommunitySustainabilityUseCase;
+
+    private final GetUserSustainabilityUseCase getUserSustainabilityUseCase;
+
     private final InitialReportMapper initialReportMapper;
 
     private final InitialCommunityStatsMapper initialCommunityStatsMapper;
+
+    private final InitialUserStatsMapper initialUserStatsMapper;
+
+
 
     @PostMapping("/report")
     public ResponseEntity<byte[]> generateReport(@RequestBody ReportCriteriaRequestDTO reportCriteriaDTO) {
@@ -79,15 +88,24 @@ public class StatisticsController {
         return ResponseEntity.status(HttpStatus.OK).body(responseDTO);
     }
 
-    @GetMapping("/public-panel")
-    public ResponseEntity<PublicPanelResponseDTO> getPublicPanel() {
-        return null;
+    @GetMapping("/community-sustainability")
+    public ResponseEntity<CommunitySustainabilityResponseDTO> getCommunitySustainability() {
+        CommunitySustainabilityResponseDTO responseDTO =  initialCommunityStatsMapper.toResponseSustainabilityDTO(getCommunitySustainabilityUseCase.getCommunitySustainability());
+        return ResponseEntity.status(HttpStatus.OK).body(responseDTO);
     }
 
-    @GetMapping("/user-panel/{userId}")
-    public ResponseEntity<UserStatsResponseDTO> getUserPanel(@PathVariable Long userId) {
-        return null;
+    @GetMapping("/user-statistics/{userId}")
+    public ResponseEntity<UserStatsResponseDTO> getUserStats(@PathVariable Long userId) {
+        UserStatsResponseDTO responseDTO = initialUserStatsMapper.toResponseDTO(getUserPanelUseCase.getUserStats(userId));
+        return ResponseEntity.status(HttpStatus.OK).body(responseDTO);
     }
+
+    @GetMapping("/user-sustainability/{userId}")
+    public ResponseEntity<UserSustainabilityResponseDTO> getUserSustainability(@PathVariable Long userId) {
+        UserSustainabilityResponseDTO responseDTO = initialUserStatsMapper.toResponseSustainabilityDTO(getUserSustainabilityUseCase.getUserSustainability(userId));
+        return ResponseEntity.status(HttpStatus.OK).body(responseDTO);
+    }
+
 
     @GetMapping("/detail-panel/{userId}")
     public ResponseEntity<PublicPanelResponseDTO> getDetailPanel(
