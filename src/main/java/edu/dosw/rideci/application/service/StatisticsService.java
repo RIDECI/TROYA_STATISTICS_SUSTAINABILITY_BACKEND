@@ -20,7 +20,7 @@ public class StatisticsService implements GenerateReportUseCase,
         GetFilteredUserStatsUseCase, GetCommunityStatslUseCase, GetUserPanelUseCase, GetDestinationPanelUserCase{
 
     private final PortStatisticsRepository portStatisticsRepository;
-    private final InitialReportMapper initialReportMapper;
+
 
 
     @Override
@@ -51,8 +51,8 @@ public class StatisticsService implements GenerateReportUseCase,
     }
 
     @Override
-    public CommunityStats getCommunityStats() {
-        return portStatisticsRepository.getGeneralPanel();
+    public List<CommunityStats> getCommunityStats(int year) {
+        return portStatisticsRepository.getGeneralPanel(year);
     }
 
     @Override

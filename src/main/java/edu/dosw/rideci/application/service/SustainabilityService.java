@@ -13,11 +13,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SustainabilityService implements GetCommunitySustainabilityUseCase, GetUserSustainabilityUseCase {
 
-    private final PortSustainabilityRepository  portSustainabilityRepository;
+    private final PortSustainabilityRepository portSustainabilityRepository;
 
     @Override
-    public CommunitySustainability getCommunitySustainability() {
-
+    public CommunitySustainability getCommunitySustainability(int year) {
         return null;
     }
 
@@ -25,4 +24,6 @@ public class SustainabilityService implements GetCommunitySustainabilityUseCase,
     public UserSustainability getUserSustainability(Long userId) {
         return null;
     }
+
+
 }

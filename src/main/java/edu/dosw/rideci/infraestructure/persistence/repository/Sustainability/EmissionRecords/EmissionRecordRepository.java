@@ -1,4 +1,4 @@
-package edu.dosw.rideci.infraestructure.persistence.repository.EmissionRecords;
+package edu.dosw.rideci.infraestructure.persistence.repository.Sustainability.EmissionRecords;
 
 import edu.dosw.rideci.infraestructure.persistence.entity.EmissionRecordDocument;
 import org.springframework.data.mongodb.repository.MongoRepository;

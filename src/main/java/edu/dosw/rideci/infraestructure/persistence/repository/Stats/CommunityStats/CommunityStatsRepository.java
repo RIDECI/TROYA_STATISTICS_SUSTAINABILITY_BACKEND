@@ -4,6 +4,9 @@ import edu.dosw.rideci.infraestructure.persistence.entity.CommunityStatsDocument
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 public interface CommunityStatsRepository extends MongoRepository<CommunityStatsDocument, String> {
+    List<CommunityStatsDocument> findByYear(int year);
 
 }

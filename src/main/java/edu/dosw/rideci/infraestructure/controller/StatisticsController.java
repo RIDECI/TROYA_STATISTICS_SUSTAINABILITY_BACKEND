@@ -82,15 +82,15 @@ public class StatisticsController {
     }
 
 
-    @GetMapping("/comumnity-statistics")
-    public ResponseEntity<CommunityStatsResponseDTO> getCommunityStats() {
-        CommunityStatsResponseDTO responseDTO = initialCommunityStatsMapper.toResponseDTO(getCommunityStatslUseCase.getCommunityStats());
+    @GetMapping("/comumnity-statistics/{year}")
+    public ResponseEntity<List<CommunityStatsResponseDTO>> getCommunityStats(@PathVariable int year) {
+        List<CommunityStatsResponseDTO> responseDTO = initialCommunityStatsMapper.toListResponseDTO(getCommunityStatslUseCase.getCommunityStats(year));
         return ResponseEntity.status(HttpStatus.OK).body(responseDTO);
     }
 
-    @GetMapping("/community-sustainability")
-    public ResponseEntity<CommunitySustainabilityResponseDTO> getCommunitySustainability() {
-        CommunitySustainabilityResponseDTO responseDTO =  initialCommunityStatsMapper.toResponseSustainabilityDTO(getCommunitySustainabilityUseCase.getCommunitySustainability());
+    @GetMapping("/community-sustainability/{year}")
+    public ResponseEntity<CommunitySustainabilityResponseDTO> getCommunitySustainability(@PathVariable int year) {
+        CommunitySustainabilityResponseDTO responseDTO =  initialCommunityStatsMapper.toResponseSustainabilityDTO(getCommunitySustainabilityUseCase.getCommunitySustainability(year));
         return ResponseEntity.status(HttpStatus.OK).body(responseDTO);
     }
 

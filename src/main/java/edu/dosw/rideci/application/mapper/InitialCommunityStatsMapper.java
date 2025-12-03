@@ -7,9 +7,13 @@ import edu.dosw.rideci.infraestructure.controller.dto.response.CommunitySustaina
 import edu.dosw.rideci.infraestructure.controller.dto.response.PublicPanelResponseDTO;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface InitialCommunityStatsMapper {
     CommunityStatsResponseDTO toResponseDTO(CommunityStats communityStats);
+
+    List<CommunityStatsResponseDTO> toListResponseDTO(List<CommunityStats> communityStatsList);
 
     CommunitySustainabilityResponseDTO toResponseSustainabilityDTO(CommunitySustainability communitySustainability);
 }

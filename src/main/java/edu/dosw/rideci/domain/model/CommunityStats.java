@@ -11,7 +11,8 @@ import java.util.Map;
 @AllArgsConstructor
 public class CommunityStats {
     private String id;
-    private double totalCo2Saved;
+    private int year;
+    private int  month;
     private int totalSharedTrips;
     private Map<UserType, Integer> totalActiveUsers;
 }
