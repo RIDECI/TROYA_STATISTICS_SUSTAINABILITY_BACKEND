@@ -22,6 +22,7 @@ public class RabbitConfig {
     public static final String PROFILE_CREATED_ROUTING_KEY = "profile.created";
     public static final String EXCHANGE_PROFILE = "profile.exchange";
     //------------------------------------
+
     //Conexion con Travel
     public static final String TRAVEL_CREATED_ROUTING_KEY = "travel.completed";
     public static final String EXCHANGE_TRAVEL = "travel.exchange";
@@ -65,7 +66,7 @@ public class RabbitConfig {
     public Binding bindingTravelCompleted(Queue travelCompletedQueue, TopicExchange travelExchange) {
         return BindingBuilder.bind(travelCompletedQueue)
                 .to(travelExchange)
-                .with("TRAVEL_CREATED_ROUTING_KEY");
+                .with(TRAVEL_CREATED_ROUTING_KEY);
     }
 
     // ------------------- Message Converter -------------------
