@@ -157,17 +157,35 @@ The following technologies were used to build and deploy this module:
 ![Diagrama de componentes](docs/img/diagramaComponentesEspecifico.png)
 
 
+
+Este diagrama muestra de forma sencilla cómo está organizado el backend encargado de las funciones de estadísticas y sostenibilidad. El flujo parte del frontend, que se comunica con el sistema a través del API Gateway. A partir de ahí, los componentes relacionados con el manejo de usuarios se encargan de obtener y validar la información necesaria consultando el módulo de gestión de usuarios y la base de datos.
+
+Dentro del backend se distinguen dos bloques principales: el de sostenibilidad y el de estadísticas. Cada uno cuenta con su propio controlador, servicio y mapper, además de los casos de uso que atienden las funcionalidades específicas de cada área. El módulo de sostenibilidad agrupa todo lo relacionado con métricas ambientales y reportes, mientras que el de estadísticas reúne los procesos encargados de generar paneles, gráficos y datos analíticos.
+
+
+
+
 ---
 
 ### Diagrama de Clases
 
-![Diagrama de clases](docs/img/digramaClases.png)
+![NuevoDiagramaDeClases.png](docs/img/NuevoDiagramaDeClases.png)
+
+
+
+Este diagrama muestra la estructura principal del módulo encargado de generar reportes. En el centro se encuentra la clase **Report**, que reúne toda la información necesaria para construir un informe: criterios de búsqueda, registros de emisiones, estadísticas del usuario, de la comunidad y de destinos. Estos datos provienen de clases como **UserStats**, **CommunityStats** y **DestinationStats**, que encapsulan distintos tipos de métricas relacionadas con uso, viajes y ahorro de CO₂.
+
+La clase **ReportCriteria** define los parámetros con los que se genera un reporte, como el período, las fechas y el formato deseado. También interviene la clase **EmissionRecord**, que representa cada registro de emisiones con datos como distancia recorrida, CO₂ ahorrado y tipo de usuario. Para calcular el impacto ambiental se utiliza la clase abstracta **CalculadoraCo2**, de la cual derivan implementaciones específicas para distintos medios de transporte, como **Car**, **Moto** y **TransportePublico**.
+
+Finalmente, el diagrama incluye el componente encargado de generar el archivo final: una estructura basada en una plantilla (**ReportTemplate**) y dos implementaciones concretas, **PdfReport** y **ExcelReport**, gestionadas a través del **ReportFactory**, que decide qué tipo de reporte crear según el formato solicitado. En conjunto, el diagrama presenta una arquitectura orientada a objetos que separa claramente los datos, las reglas de negocio y la lógica de generación del informe.
+
+
 
 ---
 
 ### Diagrama de Bases de Datos
 
-![Diagrama de datos](docs/img/diagramaBaseDatos.png)
+![DiagramBD-Nuevo.png](docs/img/DiagramBD-Nuevo.png)
 
 ---
 
