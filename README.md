@@ -173,11 +173,6 @@ Dentro del backend se distinguen dos bloques principales: el de sostenibilidad y
 
 
 
-Este diagrama muestra la estructura principal del módulo encargado de generar reportes. En el centro se encuentra la clase **Report**, que reúne toda la información necesaria para construir un informe: criterios de búsqueda, registros de emisiones, estadísticas del usuario, de la comunidad y de destinos. Estos datos provienen de clases como **UserStats**, **CommunityStats** y **DestinationStats**, que encapsulan distintos tipos de métricas relacionadas con uso, viajes y ahorro de CO₂.
-
-La clase **ReportCriteria** define los parámetros con los que se genera un reporte, como el período, las fechas y el formato deseado. También interviene la clase **EmissionRecord**, que representa cada registro de emisiones con datos como distancia recorrida, CO₂ ahorrado y tipo de usuario. Para calcular el impacto ambiental se utiliza la clase abstracta **CalculadoraCo2**, de la cual derivan implementaciones específicas para distintos medios de transporte, como **Car**, **Moto** y **TransportePublico**.
-
-Finalmente, el diagrama incluye el componente encargado de generar el archivo final: una estructura basada en una plantilla (**ReportTemplate**) y dos implementaciones concretas, **PdfReport** y **ExcelReport**, gestionadas a través del **ReportFactory**, que decide qué tipo de reporte crear según el formato solicitado. En conjunto, el diagrama presenta una arquitectura orientada a objetos que separa claramente los datos, las reglas de negocio y la lógica de generación del informe.
 
 
 
