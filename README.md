@@ -150,24 +150,24 @@ The following technologies were used to build and deploy this module:
 ![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)
 ---
 
-## Diagramas del Módulo
+## Module Diagrams
 
-### Diagrama de Componentes Específico
+### Specific Component Diagram
 
 ![Diagrama de componentes](docs/img/diagramaComponentesEspecifico.png)
 
 
 
-Este diagrama muestra de forma sencilla cómo está organizado el backend encargado de las funciones de estadísticas y sostenibilidad. El flujo parte del frontend, que se comunica con el sistema a través del API Gateway. A partir de ahí, los componentes relacionados con el manejo de usuarios se encargan de obtener y validar la información necesaria consultando el módulo de gestión de usuarios y la base de datos.
+This diagram shows in a simple way how the backend in charge of statistics and sustainability functions is organized. The flow starts from the frontend, which communicates with the system through the API Gateway. From there, the components related to user management are responsible for obtaining and validating the necessary information by consulting the user management module and the database.
 
-Dentro del backend se distinguen dos bloques principales: el de sostenibilidad y el de estadísticas. Cada uno cuenta con su propio controlador, servicio y mapper, además de los casos de uso que atienden las funcionalidades específicas de cada área. El módulo de sostenibilidad agrupa todo lo relacionado con métricas ambientales y reportes, mientras que el de estadísticas reúne los procesos encargados de generar paneles, gráficos y datos analíticos.
+Within the backend, two main blocks are distinguished: sustainability and statistics. Each one has its own controller, service and mapper, in addition to use cases that address the specific functionalities of each area. The sustainability module brings together everything related to environmental metrics and reports, while the statistics module brings together the processes responsible for generating panels, graphs and analytical data.
 
 
 
 
 ---
 
-### Diagrama de Clases
+### Class Diagram
 
 ![NuevoDiagramaDeClases.png](docs/img/NuevoDiagramaDeClases.png)
 
@@ -178,42 +178,42 @@ Dentro del backend se distinguen dos bloques principales: el de sostenibilidad y
 
 ---
 
-### Diagrama de Bases de Datos
+### Database Diagram
 
 ![DiagramBD-Nuevo.png](docs/img/DiagramBD-Nuevo.png)
 
 ---
 
-### Diagrama de Despliegue Específico del Módulo
+### Module Specific Deployment Diagram
 
 ![Diagrama de despliegue](docs/img/diagramaDespliegue.png)
 
 ---
-### Diagramas de Secuencia
+### Sequence Diagrams
 
 ![DiagramaSecuencia1.png](docs/img/DiagramaSecuencia1.png)
-## Cálculo de reducción estimada de CO₂
+## Estimated CO₂ reduction calculation
 
-Este diagrama de secuencia ilustra el recorrido completo que sigue la solicitud cuando un usuario pide calcular la reducción estimada de CO₂. El proceso comienza en el controlador, que recibe los datos del usuario y los transforma para que la lógica de negocio pueda utilizarlos. Luego, el caso de uso valida la información y solicita al adaptador que obtenga tanto el perfil del usuario como los viajes asociados al destino seleccionado. Con esos datos, el sistema realiza el cálculo correspondiente y genera una respuesta estructurada. Finalmente, la información procesada se devuelve al cliente en un formato claro y listo para ser presentado.
+This sequence diagram illustrates the complete path that the request follows when a user asks to calculate the estimated CO₂ reduction. The process begins at the controller, which receives the user's data and transforms it so that the business logic can use it. The use case then validates the information and prompts the adapter to obtain both the user's profile and the trips associated with the selected destination. With this data, the system performs the corresponding calculation and generates a structured response. Finally, the processed information is returned to the client in a clear format ready to be presented.
 
 ![DiagramaSecuencia2.png](docs/img/DiagramaSecuencia2.png)
 
-## Mostrar gráficos de participación
+## Show engagement charts
 
-Este diagrama de secuencia describe el flujo que sigue el sistema cuando un usuario solicita ver los gráficos de participación. El proceso comienza cuando el cliente envía la petición al controlador indicando el tipo de usuario, el período y el destino. El controlador delega la solicitud al caso de uso, que se encarga de reunir toda la información necesaria. Para ello, consulta al repositorio de estadísticas, que devuelve los datos correspondientes. Con esa información, el caso de uso calcula tanto el nivel de participación como el ahorro de CO₂ asociado. Una vez procesados los datos, se envían a la fábrica de gráficos, que genera la visualización final. Finalmente, el gráfico producido vuelve al controlador y este lo entrega al cliente como resultado de la solicitud.
+This sequence diagram describes the flow the system follows when a user requests to view engagement charts. The process begins when the client sends the request to the controller indicating the user type, period and destination. The controller delegates the request to the use case, which is responsible for gathering all the necessary information. To do this, consult the statistics repository, which returns the corresponding data. Using that information, the use case calculates both the level of participation and the associated CO₂ savings. Once the data is processed, it is sent to the graphics factory, which generates the final visualization. Finally, the produced graph returns to the controller and the controller delivers it to the client as a result of the request.
 
 ![DiagramaSecuencia3.png](docs/img/DiagramaSecuencia3.png)
 
-## Generar y descargar un reporte
+## Generate and download a report
 
-Este diagrama de secuencia explica cómo el sistema gestiona la solicitud de generar un reporte en el formato y tipo que el usuario elija. El proceso se inicia cuando el cliente envía su petición al controlador, que a su vez la deriva a la capa de presentación para convertirla en un objeto entendible por la lógica de dominio. Una vez transformada, la solicitud llega al caso de uso encargado de generar el reporte, el cual consulta al adaptador para obtener los datos necesarios. Dicho adaptador prepara la consulta y la envía al repositorio de viajes,
+This sequence diagram explains how the system handles the request to generate a report in the format and type that the user chooses. The process begins when the client sends its request to the controller, which in turn derives it to the presentation layer to convert it into an object understandable by the domain logic. Once transformed, the request reaches the use case in charge of generating the report, which consults the adapter to obtain the necessary data. This adapter prepares the query and sends it to the travel repository,
 
 
 ![DiagramaSecuencia4.png](docs/img/DiagramaSecuencia4.png)
 
-## Actualizar Estadisticas del Usuario
+## Update User Statistics
 
-Este diagrama de secuencia ilustra cómo el sistema procesa la solicitud para actualizar las estadísticas de un usuario. El flujo inicia cuando el cliente envía su petición al controlador, el cual la transforma mediante el mapper de presentación y la delega al caso de uso correspondiente. Desde allí se solicita al adaptador la información necesaria, comenzando por validar al usuario en el repositorio y luego obteniendo los datos de viaje a través del repositorio de viajes. Con esta información, el sistema genera las estadísticas actualizadas, las convierte nuevamente al formato de presentación y las devuelve al cliente como respuesta final.
+This sequence diagram illustrates how the system processes the request to update a user's statistics. The flow begins when the client sends its request to the controller, which transforms it using the presentation mapper and delegates it to the corresponding use case. From there, the adapter is requested to provide the necessary information, starting by validating the user in the repository and then obtaining the travel data through the travel repository. With this information, the system generates the updated statistics, converts them back to the presentation format and returns them to the client as a final response.
 
 ---
 # 🚀 Getting Started
