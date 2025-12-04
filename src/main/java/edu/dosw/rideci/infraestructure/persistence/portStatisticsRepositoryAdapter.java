@@ -84,7 +84,7 @@ public class portStatisticsRepositoryAdapter implements PortStatisticsRepository
     }
 
     @Override
-    public void updateCommunityStats(int co2Saved, TravelCompletedEvent event) {
+    public void updateCommunityStats(double co2Saved, TravelCompletedEvent event) {
         int currentYear = Year.now().getValue();
         CommunityStatsDocument lastMonthStats = communityStatsRepository.findFirstByYearOrderByMonthDesc(currentYear);
 

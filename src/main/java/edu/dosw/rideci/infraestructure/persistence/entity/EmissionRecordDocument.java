@@ -22,6 +22,7 @@ public class EmissionRecordDocument {
     private Long eId;
     private Long userId;
     private LocalDate date;
-    private double totalCO2Saved;
+    private double TotalCO2Saved;
     private UserType userRol;
+    private double distance;
 }

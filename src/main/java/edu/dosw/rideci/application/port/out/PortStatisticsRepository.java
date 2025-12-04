@@ -16,6 +16,6 @@ public interface PortStatisticsRepository {
     DestinationStats getDestinationStats(String name);
 
     EmissionRecord getEmissionRecord(Long userId, TravelCompletedEvent event);
-    void updateCommunityStats(int co2Saved, TravelCompletedEvent event);
+    void updateCommunityStats(double co2Saved, TravelCompletedEvent event);
     void updateUserStats(EmissionRecord emissionRecord, TravelCompletedEvent event);
 }

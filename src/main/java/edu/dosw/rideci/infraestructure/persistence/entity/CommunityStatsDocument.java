@@ -30,4 +30,5 @@ public class CommunityStatsDocument {
     private int  month;
     private int totalSharedTrips;
     private Map<UserType, Integer> totalActiveUsers;
+    private double TotalCO2Saved;
 }

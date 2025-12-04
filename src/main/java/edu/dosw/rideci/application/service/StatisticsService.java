@@ -65,7 +65,7 @@ public class StatisticsService implements GenerateReportUseCase,
     }
 
     @Override
-    public void updateCommunityStats(int co2Saved, TravelCompletedEvent event){
+    public void updateCommunityStats(double co2Saved, TravelCompletedEvent event){
         portStatisticsRepository.updateCommunityStats(co2Saved, event);
     }
 

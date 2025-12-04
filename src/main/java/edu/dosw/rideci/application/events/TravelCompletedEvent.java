@@ -21,4 +21,6 @@ public class TravelCompletedEvent {
     private String travelType;
     private Date departureDateAndTime;
     private List<Long> passengerList;
+    // atributos que asumo van a añadir dle modulo de viajes
+    private double distanceKm;
 }
