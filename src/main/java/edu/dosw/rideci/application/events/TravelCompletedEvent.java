@@ -1,6 +1,7 @@
 package edu.dosw.rideci.application.events;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -15,8 +16,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 public class TravelCompletedEvent {
-    private String travelId;
-    private Long driverId;
+    private long organizerId;
+    private long driverId;
+    private String travelType;
+    private Date departureDateAndTime;
     private List<Long> passengerList;
-    private String state;
 }

@@ -14,5 +14,6 @@ public class CommunityStats {
     private int year;
     private int  month;
     private int totalSharedTrips;
+    private double totalCo2Saved;
     private Map<UserType, Integer> totalActiveUsers;
 }

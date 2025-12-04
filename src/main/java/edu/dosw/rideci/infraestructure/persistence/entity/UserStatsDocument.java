@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
 import java.util.Map;
 
 @Document(collection = "UserStats")
@@ -24,6 +25,7 @@ public class UserStatsDocument {
 
     private Map<String, Integer> frequentDestinations;
     private Map<String, Integer> frequentDepartureTime;
+    private Map<String, Integer> userTypeCount;
 
     private double totalMoneySpent;
 }

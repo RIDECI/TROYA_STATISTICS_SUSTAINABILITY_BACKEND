@@ -13,7 +13,6 @@ public class EmissionRecord {
     private Long eId;
     private Long userId;
     private LocalDate date;
-    private double distance;
     private double totalCO2Saved;
     private UserType userRol;
 }

@@ -1,9 +1,7 @@
 package edu.dosw.rideci.application.port.out;
 
-import edu.dosw.rideci.domain.model.CommunityStats;
-import edu.dosw.rideci.domain.model.DestinationStats;
-import edu.dosw.rideci.domain.model.ReportCriteria;
-import edu.dosw.rideci.domain.model.UserStats;
+import edu.dosw.rideci.application.events.TravelCompletedEvent;
+import edu.dosw.rideci.domain.model.*;
 import edu.dosw.rideci.domain.model.enums.UserStatField;
 
 import java.util.*;
@@ -16,4 +14,8 @@ public interface PortStatisticsRepository {
     UserStats getUserStats(Long userId);
     Map<UserStatField, Object> getFilterStats(UserStats stats, List<UserStatField> fields);
     DestinationStats getDestinationStats(String name);
+
+    EmissionRecord getEmissionRecord(Long userId, TravelCompletedEvent event);
+    void updateCommunityStats(int co2Saved, TravelCompletedEvent event);
+    void updateUserStats(EmissionRecord emissionRecord, TravelCompletedEvent event);
 }
