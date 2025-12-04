@@ -26,8 +26,8 @@ The module will also include a public dashboard highlighting the most relevant s
 4. [Microservices Integration](#-connections-with-other-microservices)
 5. [Technologies](#technologies)
 6. [Branch Strategy](#-branches-strategy--structure)
-7. [System Architecture & Design](#-system-architecture--design)
-8. [Getting Started](#-getting-started)
+7. [System Architecture & Design](#-system-architecture--design) 
+8. [Getting Started](#-getting-started) 
 9. [Testing](#-testing)
 
 ---
@@ -67,7 +67,7 @@ The Troya Reputation & Profiles have a unacoplated hexagonal - clean architectur
 
 * **🎯 Ports (Interfaces)**: Are interfaces that define the actions that the domain can do.
 
-* **🔌 Adapters (Infrastructure)**: Are the implementations of the ports that connect the domain with the specific technologies.
+* **🔌 Adapters (Infrastructure)**: Are the implementations of the ports that connect the domain with the specific technologies. 
 
 The use of this architecture has the following benefits:
 
@@ -75,7 +75,7 @@ The use of this architecture has the following benefits:
 * ✅ **Maintainability:** Easier to update or replace specific components.
 * ✅ **Scalability:** Components can evolve independently.
 * ✅ **Testability:** The domain can be tested in isolation without a database or server.
-*
+* 
 ## 📂 Clean - Hexagonal Structure
 
 ```
@@ -142,7 +142,7 @@ The following technologies were used to build and deploy this module:
 ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
-### Design
+### Design 
 ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 
 ### Comunication & Project Management
