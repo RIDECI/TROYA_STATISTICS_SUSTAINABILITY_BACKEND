@@ -176,7 +176,33 @@ The following technologies were used to build and deploy this module:
 ![Diagrama de despliegue](docs/img/diagramaDespliegue.png)
 
 ---
+### Diagramas de Secuencia
 
+![DiagramaSecuencia1.png](docs/img/DiagramaSecuencia1.png)
+## Cálculo de reducción estimada de CO₂
+
+Este diagrama de secuencia ilustra el recorrido completo que sigue la solicitud cuando un usuario pide calcular la reducción estimada de CO₂. El proceso comienza en el controlador, que recibe los datos del usuario y los transforma para que la lógica de negocio pueda utilizarlos. Luego, el caso de uso valida la información y solicita al adaptador que obtenga tanto el perfil del usuario como los viajes asociados al destino seleccionado. Con esos datos, el sistema realiza el cálculo correspondiente y genera una respuesta estructurada. Finalmente, la información procesada se devuelve al cliente en un formato claro y listo para ser presentado.
+
+![DiagramaSecuencia2.png](docs/img/DiagramaSecuencia2.png)
+
+## Mostrar gráficos de participación
+
+Este diagrama de secuencia describe el flujo que sigue el sistema cuando un usuario solicita ver los gráficos de participación. El proceso comienza cuando el cliente envía la petición al controlador indicando el tipo de usuario, el período y el destino. El controlador delega la solicitud al caso de uso, que se encarga de reunir toda la información necesaria. Para ello, consulta al repositorio de estadísticas, que devuelve los datos correspondientes. Con esa información, el caso de uso calcula tanto el nivel de participación como el ahorro de CO₂ asociado. Una vez procesados los datos, se envían a la fábrica de gráficos, que genera la visualización final. Finalmente, el gráfico producido vuelve al controlador y este lo entrega al cliente como resultado de la solicitud.
+
+![DiagramaSecuencia3.png](docs/img/DiagramaSecuencia3.png)
+
+## Generar y descargar un reporte
+
+Este diagrama de secuencia explica cómo el sistema gestiona la solicitud de generar un reporte en el formato y tipo que el usuario elija. El proceso se inicia cuando el cliente envía su petición al controlador, que a su vez la deriva a la capa de presentación para convertirla en un objeto entendible por la lógica de dominio. Una vez transformada, la solicitud llega al caso de uso encargado de generar el reporte, el cual consulta al adaptador para obtener los datos necesarios. Dicho adaptador prepara la consulta y la envía al repositorio de viajes,
+
+
+![DiagramaSecuencia4.png](docs/img/DiagramaSecuencia4.png)
+
+## Actualizar Estadisticas del Usuario
+
+Este diagrama de secuencia ilustra cómo el sistema procesa la solicitud para actualizar las estadísticas de un usuario. El flujo inicia cuando el cliente envía su petición al controlador, el cual la transforma mediante el mapper de presentación y la delega al caso de uso correspondiente. Desde allí se solicita al adaptador la información necesaria, comenzando por validar al usuario en el repositorio y luego obteniendo los datos de viaje a través del repositorio de viajes. Con esta información, el sistema genera las estadísticas actualizadas, las convierte nuevamente al formato de presentación y las devuelve al cliente como respuesta final.
+
+---
 # 🚀 Getting Started
 
 This section guides you through setting ip the project locally. This project requires **Java 17**. If you have a different version, you can change it or we recommend using **Docker** to ensure compatibility before compile.
