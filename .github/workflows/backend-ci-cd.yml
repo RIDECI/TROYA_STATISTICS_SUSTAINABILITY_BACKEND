@@ -1,0 +1,107 @@
+name: Project Build, Test, & Deploy
+
+on:
+  push:
+    branches: ["main", "develop", "feature/*"]
+  pull_request:
+    branches: ["main", "develop"]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "microsoft"
+
+      - name: Build with Maven
+        run: mvn clean package
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: java-app
+          path: "target/*.jar"
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "microsoft"
+
+      - name: Run tests and verify
+        run: mvn verify
+
+      - name: Generate Jacoco Report
+        run: mvn jacoco:report
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: "target/site/jacoco/"
+          retention-days: 5
+
+  sonar:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "zulu"
+
+      - name: Cache SonarQube packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+
+      - name: Run SonarCloud Analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          mvn -B verify sonar:sonar \
+            -Dsonar.projectKey=RIDECI_TROYA_STATISTICS_SUSTAINABILITY_BACKEND \
+            -Dsonar.organization=rideci \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=$SONAR_TOKEN
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: sonar
+    if: |
+      github.ref == 'refs/heads/develop' ||
+      github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar Railway CLI
+        run: npm install -g @railway/cli
+
+      - name: Desplegar a Railway
+        run: |
+          echo "Desplegando en Railway..."
+          if [ "${{ github.ref_name }}" = "develop" ]; then
+            RAILWAY_TOKEN=${{ secrets.RAILWAY_TOKEN_STAGING }} railway up --service TROYA_STATISTICS_SUSTAINABILITY_BACKEND --environment Staging
+          elif [ "${{ github.ref_name }}" = "main" ]; then
+            RAILWAY_TOKEN=${{ secrets.RAILWAY_TOKEN_PRODUCTION }} railway up --service TROYA_STATISTICS_SUSTAINABILITY_BACKEND --environment production
+          fi
+      
