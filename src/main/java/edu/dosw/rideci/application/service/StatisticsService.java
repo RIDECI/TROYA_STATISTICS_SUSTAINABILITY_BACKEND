@@ -4,6 +4,7 @@ import edu.dosw.rideci.application.events.TravelCompletedEvent;
 import edu.dosw.rideci.application.port.in.Statistics.*;
 import edu.dosw.rideci.application.port.out.PortStatisticsRepository;
 import edu.dosw.rideci.domain.model.*;
+import edu.dosw.rideci.domain.model.enums.ReportFormat;
 import edu.dosw.rideci.domain.model.enums.UserStatField;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,22 +21,12 @@ public class StatisticsService implements GenerateReportUseCase,
     private final PortStatisticsRepository portStatisticsRepository;
 
 
-
     @Override
-    public byte[] generateReport(ReportCriteria criteria) {
-        return portStatisticsRepository.generateReport(criteria);
+    public byte[] generateReport(ReportCriteria criteria, ReportFormat reportFormat) {
+        return portStatisticsRepository.generateReport(criteria,reportFormat);
 
     }
 
-    @Override
-    public byte[] generatePDFReport(ReportCriteria criteria) {
-        return portStatisticsRepository.generatePDFReport(criteria);
-    }
-
-    @Override
-    public byte[] generateEXELReport(ReportCriteria criteria) {
-        return portStatisticsRepository.genereateEXELReport(criteria);
-    }
 
 
     @Override
@@ -44,8 +35,8 @@ public class StatisticsService implements GenerateReportUseCase,
     }
 
     @Override
-    public Map<UserStatField, Object> filterStats(UserStats stats, List<UserStatField> fields) {
-        return portStatisticsRepository.getFilterStats(stats, fields);
+    public Map<UserStatField, Object> filterStats(long userId, List<UserStatField> fields) {
+        return portStatisticsRepository.getFilterStats(userId, fields);
     }
 
     @Override

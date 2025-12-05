@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/statistics")
@@ -48,38 +49,21 @@ public class StatisticsController {
 
 
 
-    @PostMapping("/report")
-    public ResponseEntity<byte[]> generateReport(@RequestBody ReportCriteriaRequestDTO reportCriteriaDTO) {
+    @PostMapping("/report/{format}")
+    public ResponseEntity<byte[]> generateReport(@RequestBody ReportCriteriaRequestDTO reportCriteriaDTO,
+                                                 @PathVariable ReportFormat format) {
         ReportCriteria reportC = initialReportMapper.toDomain(reportCriteriaDTO);
-        byte[] reportContent  = generateReportUseCase.generateReport(reportC);
-        return ResponseEntity.status(HttpStatus.CREATED).body(reportContent);
-    }
+        byte[] reportContent = generateReportUseCase.generateReport(reportC, format);
 
-    @PostMapping("/report/PDF")
-    public ResponseEntity<byte[]> generatePDFReport(@RequestBody ReportCriteriaRequestDTO reportCriteriaDTO,
-                                                    @RequestParam ReportFormat reportFormat) {
-        ReportCriteria reportC = initialReportMapper.toDomain(reportCriteriaDTO);
-        byte[] reportContent  = generateReportUseCase.generatePDFReport(reportC);
+        String filename = format.generateFilename(reportC.getUserId(), reportC.getPeriod());
+
         return ResponseEntity.status(HttpStatus.CREATED)
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=report.pdf")
-                .contentType(MediaType.APPLICATION_PDF)
+                .header(HttpHeaders.CONTENT_TYPE, format.getContentType())
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
                 .body(reportContent);
     }
 
-    @PostMapping("/report/EXCEL")
-    public ResponseEntity<byte[]> generateEXELReport(@RequestBody ReportCriteriaRequestDTO reportCriteriaDTO,
-                                                    @RequestParam ReportFormat reportFormat) {
-        ReportCriteria reportC = initialReportMapper.toDomain(reportCriteriaDTO);
-        byte[] reportContent = generateReportUseCase.generateEXELReport(reportC);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=report.xlsx")
-                .contentType(
-                        MediaType.parseMediaType(
-                                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                        )
-                )
-                .body(reportContent);
-    }
+
 
 
     @GetMapping("/comumnity-statistics/{year}")
@@ -108,11 +92,11 @@ public class StatisticsController {
 
 
     @GetMapping("/detail-panel/{userId}")
-    public ResponseEntity<PublicPanelResponseDTO> getDetailPanel(
+    public ResponseEntity<Map<UserStatField, Object>> getDetailPanel(
             @PathVariable Long userId,
             @RequestParam List<UserStatField> filteredStats){
-
-        return null;
+        Map<UserStatField,Object> response = getFilteredUserStatsUseCase.filterStats(userId, filteredStats);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
 }

@@ -19,4 +19,5 @@ public class UserStats {
     private Map<String, Integer> frequentDepartureTime;
     private Map<String, Integer> userTypeCount;
     private double totalMoneySpent;
+    private double totalEarnings;
 }

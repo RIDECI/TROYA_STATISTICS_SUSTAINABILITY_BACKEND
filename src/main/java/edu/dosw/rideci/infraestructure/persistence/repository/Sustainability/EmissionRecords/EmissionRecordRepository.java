@@ -12,4 +12,6 @@ public interface EmissionRecordRepository extends MongoRepository<EmissionRecord
 
     List<EmissionRecordDocument> findByDateBetween(LocalDate start, LocalDate end);
 
+    List<EmissionRecordDocument> findByUserIdAndDateBetween(Long userId, LocalDate startDate, LocalDate endDate);
+
 }
