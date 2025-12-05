@@ -14,8 +14,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class StatisticsService implements GenerateReportUseCase,
-        GetFilteredUserStatsUseCase, GetCommunityStatslUseCase, GetUserPanelUseCase, GetDestinationPanelUserCase,
-        GenerateEmissionRecordUseCase, UpdateCommunityStatsUseCase, UpdateUserStatsUseCase {
+        GetFilteredUserStatsUseCase, GetCommunityStatslUseCase, GetUserPanelUseCase, GetDestinationPanelUserCase {
 
     private final PortStatisticsRepository portStatisticsRepository;
 
@@ -58,19 +57,4 @@ public class StatisticsService implements GenerateReportUseCase,
         return portStatisticsRepository.getDestinationStats(name);
     }
 
-
-    @Override
-    public EmissionRecord generateEmissionRecord(long userId, TravelCompletedEvent event) {
-        return  portStatisticsRepository.getEmissionRecord(userId, event);
-    }
-
-    @Override
-    public void updateCommunityStats(double co2Saved, TravelCompletedEvent event){
-        portStatisticsRepository.updateCommunityStats(co2Saved, event);
-    }
-
-    @Override
-    public void updateFromTravel(EmissionRecord emissionRecord, TravelCompletedEvent event) {
-            portStatisticsRepository.updateUserStats(emissionRecord, event);
-    }
 }

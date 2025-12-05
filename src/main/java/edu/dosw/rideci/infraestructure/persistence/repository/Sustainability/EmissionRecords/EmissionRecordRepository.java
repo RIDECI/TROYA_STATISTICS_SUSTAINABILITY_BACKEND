@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface EmissionRecordRepository extends MongoRepository<EmissionRecordDocument, String> {
+public interface EmissionRecordRepository extends MongoRepository<EmissionRecordDocument, Long> {
 
     List<EmissionRecordDocument> findByUserId(Long userId);
 

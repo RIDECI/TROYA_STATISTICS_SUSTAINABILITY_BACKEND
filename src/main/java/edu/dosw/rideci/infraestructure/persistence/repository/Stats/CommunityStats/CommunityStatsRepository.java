@@ -9,5 +9,4 @@ import java.util.List;
 public interface CommunityStatsRepository extends MongoRepository<CommunityStatsDocument, String> {
     List<CommunityStatsDocument> findByYear(int year);
     CommunityStatsDocument findFirstByYearOrderByMonthDesc(int year);
-    void addCo2Saved(double amountKg);
 }
