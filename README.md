@@ -215,6 +215,17 @@ This sequence diagram explains how the system handles the request to generate a 
 
 This sequence diagram illustrates how the system processes the request to update a user's statistics. The flow begins when the client sends its request to the controller, which transforms it using the presentation mapper and delegates it to the corresponding use case. From there, the adapter is requested to provide the necessary information, starting by validating the user in the repository and then obtaining the travel data through the travel repository. With this information, the system generates the updated statistics, converts them back to the presentation format and returns them to the client as a final response.
 
+Swagger
+
+![Swagger](docs/img/swagger.png)
+
+
+🔍 Static Analysis (SonarQube)
+
+![Sonar](docs/img/sonar.png)
+
+
+
 ---
 # 🚀 Getting Started
 
@@ -223,11 +234,11 @@ This section guides you through setting ip the project locally. This project req
 ### Clone & open repository
 
 ``` bash
-git clone https://github.com/RIDECI/TROYA_REPUTATION_BACKEND.git
+git clone https://github.com/RIDECI/TROYA_STADISTICS_SUSTAINABLITY_BACKEND.git
 ```
 
 ``` bash
-cd TROYA_REPUTATION_BACKEND
+cd TROYA_STADISTICS_SUSTAINABLITY_BACKEND
 ```
 
 You can open it on your favorite IDE
