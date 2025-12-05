@@ -2,17 +2,16 @@ package edu.dosw.rideci.application.port.out;
 
 import edu.dosw.rideci.application.events.TravelCompletedEvent;
 import edu.dosw.rideci.domain.model.*;
+import edu.dosw.rideci.domain.model.enums.ReportFormat;
 import edu.dosw.rideci.domain.model.enums.UserStatField;
 
 import java.util.*;
 
 public interface PortStatisticsRepository {
     List<CommunityStats> getGeneralPanel(int year);
-    byte[] generateReport(ReportCriteria criteria);
-    byte[] generatePDFReport(ReportCriteria criteria);
-    byte[] genereateEXELReport(ReportCriteria criteria);
+    byte[] generateReport(ReportCriteria criteria, ReportFormat reportFormat);
     UserStats getUserStats(Long userId);
-    Map<UserStatField, Object> getFilterStats(UserStats stats, List<UserStatField> fields);
+    Map<UserStatField, Object> getFilterStats(long id, List<UserStatField> fields);
     DestinationStats getDestinationStats(String name);
 
     EmissionRecord getEmissionRecord(Long userId, TravelCompletedEvent event);

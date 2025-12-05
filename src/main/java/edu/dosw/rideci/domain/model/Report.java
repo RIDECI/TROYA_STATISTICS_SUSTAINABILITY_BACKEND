@@ -13,7 +13,6 @@ public class Report {
     private List<EmissionRecord> records;
 
     private UserStats userStats;
-    private CommunityStats communityStats;
 
     private List<DestinationStats> destinationStats;
 }

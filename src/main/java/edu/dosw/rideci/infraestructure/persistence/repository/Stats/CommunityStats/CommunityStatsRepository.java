@@ -10,4 +10,8 @@ public interface CommunityStatsRepository extends MongoRepository<CommunityStats
     List<CommunityStatsDocument> findByYear(int year);
     CommunityStatsDocument findFirstByYearOrderByMonthDesc(int year);
 
+    List<CommunityStatsDocument> findByYearAndMonth(int year, int month);
+
+    List<CommunityStatsDocument> findByYearAndMonthBetween(int year, int startMonth, int endMonth);
+
 }

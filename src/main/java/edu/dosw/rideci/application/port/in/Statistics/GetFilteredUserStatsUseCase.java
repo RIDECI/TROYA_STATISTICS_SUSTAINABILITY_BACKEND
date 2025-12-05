@@ -6,6 +6,6 @@ import edu.dosw.rideci.domain.model.enums.UserStatField;
 import java.util.*;
 
 public interface GetFilteredUserStatsUseCase {
-    Map<UserStatField, Object> filterStats(UserStats stats, List<UserStatField> fields);
+    Map<UserStatField, Object> filterStats(long userId, List<UserStatField> fields);
 
 }
