@@ -150,6 +150,63 @@ The following technologies were used to build and deploy this module:
 ![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)
 ---
 
+# 📡 Statistics API Endpoints
+
+
+## 📊 Reports (Generación de reportes)
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| **POST** | `/statistics/report/{format}` | Genera un reporte en el formato solicitado (`PDF`, `EXCEL`, etc.) usando criterios de búsqueda. Devuelve un archivo descargable. |
+
+---
+
+## 🌍 Community Statistics (Estadísticas de comunidad)
+
+### 📈 Estadísticas generales
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| **GET** | `/statistics/comumnity-statistics/{year}` | Retorna las estadísticas globales de la comunidad para el año especificado. |
+
+### 🌱 Sostenibilidad comunitaria
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| **GET** | `/statistics/community-sustainability/{year}` | Obtiene los indicadores de sostenibilidad agregada para toda la comunidad. |
+
+---
+
+## 👤 User Statistics (Estadísticas del usuario)
+
+### 📊 Panel general del usuario
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| **GET** | `/statistics/user-statistics/{userId}` | Devuelve todas las métricas de desempeño del usuario. |
+
+### 🌱 Sostenibilidad del usuario
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| **GET** | `/statistics/user-sustainability/{userId}` | Retorna datos de sostenibilidad específicos del usuario. |
+
+### 🧩 Panel detallado (métricas filtradas)
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| **GET** | `/statistics/detail-panel/{userId}` | Permite solicitar métricas específicas enviando una lista de `UserStatField` en la query `filteredStats`. |
+
+---
+
+### 📟 HTTP Status Codes
+Common status codes returned by the API.
+
+| Code | Status | Description |
+| :--- | :--- | :--- |
+| `200` | **OK** | Request processed successfully. |
+| `201` | **Created** | Resource (Route/Tracking) created successfully. |
+| `400` | **Bad Request** | Invalid coordinates or missing parameters. |
+| `401` | **Unauthorized** | Missing or invalid JWT token. |
+| `404` | **Not Found** | Route or Trip ID does not exist. |
+| `500` | **Internal Server Error** | Unexpected error (e.g., Google Maps API failure).
+
+
 ## Module Diagrams
 
 ### Specific Component Diagram
