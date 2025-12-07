@@ -216,6 +216,8 @@ This sequence diagram explains how the system handles the request to generate a 
 This sequence diagram illustrates how the system processes the request to update a user's statistics. The flow begins when the client sends its request to the controller, which transforms it using the presentation mapper and delegates it to the corresponding use case. From there, the adapter is requested to provide the necessary information, starting by validating the user in the repository and then obtaining the travel data through the travel repository. With this information, the system generates the updated statistics, converts them back to the presentation format and returns them to the client as a final response.
 
 ---
+# Jacoco
+![Jacoco](docs/img/jacoco.png)
 # 🚀 Getting Started
 
 This section guides you through setting ip the project locally. This project requires **Java 17**. If you have a different version, you can change it or we recommend using **Docker** to ensure compatibility before compile.
