@@ -284,6 +284,8 @@ Swagger
 
 
 ---
+# Jacoco
+![Jacoco](docs/img/jacoco.png)
 # 🚀 Getting Started
 
 This section guides you through setting ip the project locally. This project requires **Java 17**. If you have a different version, you can change it or we recommend using **Docker** to ensure compatibility before compile.
