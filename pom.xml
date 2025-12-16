@@ -160,17 +160,19 @@
                             <goal>report</goal>
                         </goals>
                         <configuration>
-                            <excludes>
-                                <exclude>**/model/**</exclude>
-                                <exclude>**/dto/**</exclude>
-								<exclude>**/enums/**</exclude>
-                                <exclude>**/config/*</exclude>
-								<exclude>**/mapper/*</exclude>
-								<exclude>**/exception/*</exclude>
-								<exclude>**/common/*</exclude>
-                                <exclude>**/TroyaStatisticsSustainabilityBackendApplication.class</exclude>
-                            </excludes>
-                        </configuration>
+							<excludes>
+								<exclude>**/application/**</exclude>
+								<exclude>**/domain/**</exclude>
+								<exclude>**/infraestructure/persistence/entity/**</exclude>
+								<exclude>**/infraestructure/persistence/repository/mapper/**</exclude>
+								<exclude>**/infraestructure/Adapter/**</exclude>
+								<exclude>**/infraestructure/*</exclude>
+								<exclude>**/infraestructure/config/**</exclude>
+								<exclude>**/infraestructure/controller/dto/**</exclude>
+								<exclude>**/exceptions/**</exclude>
+								<exclude>**/TroyaStatisticsSustainabilityBackendApplication.class</exclude>
+							</excludes>
+						</configuration>
                     </execution>
                     <execution>
                         <id>jacoco-check</id>
